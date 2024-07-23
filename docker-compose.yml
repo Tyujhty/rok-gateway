@@ -8,6 +8,8 @@ services:
     image: mongo:latest
     ports:
       - '27018:27017'
+    volumes:
+      - mongodb_data:/data/db
   gateway:
     build: .
     ports:
@@ -24,3 +26,6 @@ services:
     environment:
       - NATS_URL=nats://nats:4222
       - MONGO_URL=mongodb://mongo:27017/ms-quiz
+volumes:
+  mongodb_data:
+    driver: local
