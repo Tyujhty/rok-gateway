@@ -28,4 +28,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/tyujhty/rok-gateway:develop
+          tags: ghcr.io/tyujhty/rok-gateway:devops
