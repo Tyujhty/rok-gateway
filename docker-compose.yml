@@ -1,0 +1,26 @@
+services:
+  nats:
+    image: nats:latest
+    ports:
+      - '4222:4222'
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27018:27017'
+  gateway:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - nats
+    environment:
+      - NATS_URL=nats://nats:4222
+  ms-quiz:
+    build: ./../ms-quiz
+    depends_on:
+      - mongo
+      - nats
+    environment:
+      - NATS_URL=nats://nats:4222
+      - MONGO_URL=mongodb://mongo:27017/ms-quiz
